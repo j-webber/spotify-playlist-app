@@ -10,12 +10,7 @@ function App() {
     setLoggedIn(() => Spotify.hasAccessToken());
   }, []);
 
-  function handleClick(e) {
-    e.preventDefault();
-    Spotify.logIn();
-  }
-
-  if (!loggedIn) return <Login onClick={handleClick} />;
+  if (!loggedIn) return <Login />;
 
   return (
     <div className="App">
