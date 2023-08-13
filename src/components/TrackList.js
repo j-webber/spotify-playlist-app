@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TrackList(params) {
   const { tracks } = params;
-  console.log(tracks);
+
   const trackList = tracks.map((track) => (
     <li key={track.id}>
       {track.name}
