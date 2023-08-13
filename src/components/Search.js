@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Spotify from "../utils/Spotify";
+import TrackList from "./TrackList";
 
 export default function Search(params) {
   const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
     if (search) {
@@ -16,12 +18,15 @@ export default function Search(params) {
 
   async function searchForItem() {
     let results = await Spotify.search(search);
-    console.log(results);
+    setSearchResults(results.tracks.items);
   }
 
   return (
-    <form>
-      <input type="text" value={search} onChange={handleChange} />
-    </form>
+    <>
+      <form>
+        <input type="text" value={search} onChange={handleChange} />
+      </form>
+      <TrackList tracks={searchResults} />
+    </>
   );
 }

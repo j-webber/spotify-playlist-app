@@ -90,8 +90,12 @@ async function getAccessToken(clientId, code) {
     body: params,
   });
 
-  const { access_token } = await result.json();
+  const { access_token, expires_in, refresh_token } = await result.json();
+  localStorage.setItem("expires_in", expires_in); //use this to check if access token has epxire - max time 3600 seconds
+  localStorage.setItem("refresh_token", refresh_token); //use this to refresh token when expired
   return access_token;
 }
+
+//write function to check whether accessToken has expired. If expired then refresh access token
 
 export default Spotify;
