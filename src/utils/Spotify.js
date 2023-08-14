@@ -32,6 +32,25 @@ const Spotify = {
     const data = await response.json();
     return data;
   },
+  async getTrackInfo(trackId) {
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/tracks/${trackId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        }
+      );
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log(error.status);
+      console.log(error.message);
+    }
+  },
 };
 
 async function redirectToAuthCodeFlow(clientId) {
